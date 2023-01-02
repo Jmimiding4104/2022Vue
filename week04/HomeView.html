@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        img {
+            object-fit: contain;
+            max-width: 100%;
+        }
+
+        .primary-image {
+            height: 300px;
+        }
+
+        .images {
+            height: 150px;
+        }
+    </style>
+    <title>Products</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="text-end mt-4">
+                <button class="btn btn-primary" @click="openModal('new')">
+                    建立新的產品
+                </button>
+            </div>
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th width="120">
+                            分類
+                        </th>
+                        <th>產品名稱</th>
+                        <th width="120">
+                            原價
+                        </th>
+                        <th width="120">
+                            售價
+                        </th>
+                        <th width="100">
+                            是否啟用
+                        </th>
+                        <th width="120">
+                            編輯
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in products" :key="products.id">
+                        <td>{{item.category}}</td>
+                        <td>{{item.title}}</td>
+                        <td class="text-end">{{item.origin_price}}</td>
+                        <td class="text-end">{{item.price}}</td>
+                        <td>
+                            <span class="text-success" v-if="item.is_enabled">啟用</span>
+                            <span v-else>未啟用</span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary btn-sm"
+                                    @click="openModal('edit', item)">
+                                    編輯
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                    @click="openModal('del', item)">
+                                    刪除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination :pages="pagination" @get-products="getData"></pagination>
+        </div>
+        <!-- Modal -->
+        <del-product-modal :temp-product="tempProduct" ref="delProductModal"></del-product-modal>
+        <temp-product-modal :temp-product="tempProduct" :is-new="isNew" :api-path="apiPath" :api-url="apiUrl"
+            @get-data="getData" ref="productModal" />
+        </temp-product-modal>
+
+        <!-- Modal -->
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="module" src="./js/HomeView.js"></script>
+</body>
+
+</html>
