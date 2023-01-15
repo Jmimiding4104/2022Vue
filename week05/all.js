@@ -1,6 +1,3 @@
-const apiUrl = "https://vue3-course-api.hexschool.io/v2";
-const apiPath = "Jmimiding4104";
-
 import modal from "./userProductModal.js";
 
 const { defineRule, Form, Field, ErrorMessage, configure } = VeeValidate;
@@ -40,6 +37,8 @@ const app = Vue.createApp({
                 },
                 message: "",
             },
+            apiUrl: "https://vue3-course-api.hexschool.io/v2",
+            apiPath: "Jmimiding4104",
         };
     },
     components: {
@@ -48,7 +47,7 @@ const app = Vue.createApp({
     methods: {
         getProducts() {
             axios
-                .get(`${apiUrl}/api/${apiPath}/products/all`)
+                .get(`${this.apiUrl}/api/${this.apiPath}/products/all`)
                 .then((res) => {
                     this.products = res.data.products;
                 })
@@ -58,7 +57,7 @@ const app = Vue.createApp({
         },
         getCarts() {
             axios
-                .get(`${apiUrl}/api/${apiPath}/cart`)
+                .get(`${this.apiUrl}/api/${this.apiPath}/cart`)
                 .then((res) => {
                     this.cartData = res.data.data;
                 })
@@ -74,7 +73,7 @@ const app = Vue.createApp({
             };
             this.isLoading = id;
             axios
-                .post(`${apiUrl}/api/${apiPath}/cart`, { data })
+                .post(`${this.apiUrl}/api/${this.apiPath}/cart`, { data })
                 .then(() => {
                     this.getCarts();
                     this.$refs.productsModal.closeModal();
@@ -87,7 +86,7 @@ const app = Vue.createApp({
         delCartItem(id) {
             this.isLoading = id;
             axios
-                .delete(`${apiUrl}/api/${apiPath}/cart/${id}`)
+                .delete(`${this.apiUrl}/api/${this.apiPath}/cart/${id}`)
                 .then(() => {
                     this.getCarts();
                     this.isLoading = "";
@@ -98,7 +97,7 @@ const app = Vue.createApp({
         },
         delCarts() {
             axios
-                .delete(`${apiUrl}/api/${apiPath}/carts`)
+                .delete(`${this.apiUrl}/api/${this.apiPath}/carts`)
                 .then(() => {
                     alert("已成功清除購物車");
                     this.getCarts();
@@ -114,7 +113,7 @@ const app = Vue.createApp({
             };
             this.isLoading = item.id;
             axios
-                .put(`${apiUrl}/api/${apiPath}/cart/${item.id}`, { data })
+                .put(`${this.apiUrl}/api/${this.apiPath}/cart/${item.id}`, { data })
                 .then(() => {
                     this.getCarts();
 
@@ -127,7 +126,7 @@ const app = Vue.createApp({
         },
         sendOrder() {
             axios
-                .post(`${apiUrl}/api/${apiPath}/order`, { data: this.form })
+                .post(`${this.apiUrl}/api/${this.apiPath}/order`, { data: this.form })
                 .then((res) => {
                     alert(res.data.message);
                     this.$refs.form.resetForm();

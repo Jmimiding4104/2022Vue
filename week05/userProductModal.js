@@ -1,8 +1,5 @@
-const apiUrl = "https://vue3-course-api.hexschool.io/v2";
-const apiPath = "Jmimiding4104";
-
 export default {
-    props: ["id"],
+    props: ["id", "apiUrl", "apiPath"],
     template: `      <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalLabel" aria-hidden="true" ref="productModal">
 <div class="modal-dialog modal-xl" role="document">
@@ -64,7 +61,7 @@ export default {
         getProduct() {
             //從外部的資料要this.才能取得
             axios
-                .get(`${apiUrl}/api/${apiPath}/product/${this.id}`)
+                .get(`${this.apiUrl}/api/${this.apiPath}/product/${this.id}`)
                 .then((res) => {
                     this.product = res.data.product;
                     //console.log(res);

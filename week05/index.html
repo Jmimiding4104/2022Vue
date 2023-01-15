@@ -18,7 +18,8 @@
         <div class="container">
             <div class="mt-4">
                 <!-- 產品Modal -->
-                <modal :id="productId" ref="productsModal" @add-to-cart="addToCart">
+                <modal :id="productId" ref="productsModal" @add-to-cart="addToCart" :api-url="apiUrl"
+                    :api-path="apiPath">
                 </modal>
                 <!-- 產品Modal -->
 
