@@ -59,12 +59,10 @@ export default {
             this.productModal.hide();
         },
         getProduct() {
-            //從外部的資料要this.才能取得
             axios
                 .get(`${this.apiUrl}/api/${this.apiPath}/product/${this.id}`)
                 .then((res) => {
                     this.product = res.data.product;
-                    //console.log(res);
                 })
                 .catch((err) => {
                     alert(err.data.message);
@@ -72,7 +70,6 @@ export default {
         },
         addToCart() {
             this.$emit("add-to-cart", this.product.id, this.qty);
-            //this.productModal.hide();
         },
     },
     mounted() {

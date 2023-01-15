@@ -65,7 +65,6 @@ const app = Vue.createApp({
                     alert(err.data.message);
                 });
         },
-        //qty = 1 參數預設值
         addToCart(id, qty = 1) {
             const data = {
                 product_id: id,
@@ -116,9 +115,7 @@ const app = Vue.createApp({
                 .put(`${this.apiUrl}/api/${this.apiPath}/cart/${item.id}`, { data })
                 .then(() => {
                     this.getCarts();
-
                     this.isLoading = "";
-                    //console.log(item);
                 })
                 .catch((err) => {
                     alert(err.data.message);
@@ -142,8 +139,6 @@ const app = Vue.createApp({
         openModal(id) {
             this.$refs.productsModal.openModal();
             this.productId = id;
-
-            //this.$refs.productsModal.getProduct();
         },
     },
     mounted() {
