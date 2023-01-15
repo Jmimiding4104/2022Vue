@@ -54,6 +54,7 @@ export default {
     methods: {
         openModal() {
             this.productModal.show();
+            this.qty = 1;
         },
         closeModal() {
             this.productModal.hide();
@@ -70,6 +71,7 @@ export default {
         },
         addToCart() {
             this.$emit("add-to-cart", this.product.id, this.qty);
+            this.qty = 1;
         },
     },
     mounted() {
